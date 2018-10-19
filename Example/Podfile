@@ -1,0 +1,6 @@
+use_frameworks!
+target 'WSAP_Tests' do
+  pod 'WSAP', :path => '../'
+  
+  
+end
