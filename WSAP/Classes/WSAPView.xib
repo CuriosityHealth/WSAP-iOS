@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WSAPView" customModule="iChange" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="405"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="N0p-f8-qL1">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="405"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6fw-gC-GRB">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="405"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eqh-Zy-ng3">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="205"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cross" translatesAutoresizingMaskIntoConstraints="NO" id="GJr-2O-fH6">
+                                            <rect key="frame" x="112.5" y="28" width="150" height="150"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="GJr-2O-fH6" secondAttribute="height" multiplier="1:1" id="4aj-qU-lCt"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZR-nn-KZE" userLabel="Text Label" customClass="WSAPLabel" customModule="iChange" customModuleProvider="target">
+                                            <rect key="frame" x="157" y="86.5" width="61.5" height="31.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnm-BU-4oQ" customClass="WSAPFeedbackLabel" customModule="iChange" customModuleProvider="target">
+                                            <rect key="frame" x="118" y="194" width="138" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="GJr-2O-fH6" firstAttribute="centerX" secondItem="eqh-Zy-ng3" secondAttribute="centerX" id="24P-td-aVC"/>
+                                        <constraint firstItem="GJr-2O-fH6" firstAttribute="centerY" secondItem="eqh-Zy-ng3" secondAttribute="centerY" id="FRz-b1-914"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hZR-nn-KZE" secondAttribute="trailing" priority="100" constant="20" id="Nn0-Ne-uDz"/>
+                                        <constraint firstItem="hZR-nn-KZE" firstAttribute="centerY" secondItem="eqh-Zy-ng3" secondAttribute="centerY" id="UTP-cf-Ivw"/>
+                                        <constraint firstItem="rnm-BU-4oQ" firstAttribute="top" secondItem="GJr-2O-fH6" secondAttribute="bottom" constant="16" id="bWR-vr-Qyq"/>
+                                        <constraint firstItem="hZR-nn-KZE" firstAttribute="centerX" secondItem="eqh-Zy-ng3" secondAttribute="centerX" id="dtc-3S-rye"/>
+                                        <constraint firstItem="rnm-BU-4oQ" firstAttribute="centerX" secondItem="eqh-Zy-ng3" secondAttribute="centerX" id="dxi-Ht-e2p"/>
+                                        <constraint firstItem="hZR-nn-KZE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eqh-Zy-ng3" secondAttribute="leading" constant="20" id="ehg-oA-BZ1"/>
+                                        <constraint firstItem="hZR-nn-KZE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eqh-Zy-ng3" secondAttribute="top" priority="500" constant="8" id="lVC-il-1E4"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hZR-nn-KZE" secondAttribute="bottom" priority="500" constant="8" id="sLX-0Q-Uog"/>
+                                        <constraint firstItem="GJr-2O-fH6" firstAttribute="width" secondItem="eqh-Zy-ng3" secondAttribute="width" multiplier="0.4" id="xRQ-yt-btu"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fc4-5n-XiY" customClass="WSAPProgressView" customModule="iChange" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="205" width="375" height="100"/>
+                                    <color key="backgroundColor" red="0.59999999999999998" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="fXa-4c-w1a"/>
+                                    </constraints>
+                                </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zbT-V4-Bh3" userLabel="ButtonStackView">
+                                    <rect key="frame" x="0.0" y="305" width="375" height="80"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qCF-Mh-T1G">
+                                            <rect key="frame" x="0.0" y="10" width="187.5" height="60"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iAr-l0-ENg" customClass="RSBorderedButton" customModule="ResearchSuiteExtensions">
+                                                    <rect key="frame" x="19" y="8" width="150.5" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="RGI-0F-OVl"/>
+                                                        <constraint firstAttribute="width" constant="150" id="i0y-fO-hp1"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Yes"/>
+                                                    <connections>
+                                                        <action selector="tappedAffirmativeButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="MnG-hR-oD9"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="iAr-l0-ENg" secondAttribute="bottom" constant="8" id="LV3-8c-zPa"/>
+                                                <constraint firstItem="iAr-l0-ENg" firstAttribute="top" secondItem="qCF-Mh-T1G" secondAttribute="top" constant="8" id="NmZ-Sc-ua1"/>
+                                                <constraint firstItem="iAr-l0-ENg" firstAttribute="centerX" secondItem="qCF-Mh-T1G" secondAttribute="centerX" id="Pbw-fy-OEi"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sqW-2d-0kf">
+                                            <rect key="frame" x="187.5" y="10" width="187.5" height="60"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSj-mt-nf9" customClass="RSBorderedButton" customModule="ResearchSuiteExtensions">
+                                                    <rect key="frame" x="19.5" y="8" width="150" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="150" id="ENL-po-Kfu"/>
+                                                        <constraint firstAttribute="height" constant="44" id="Nob-5i-8wc"/>
+                                                    </constraints>
+                                                    <state key="normal" title="No"/>
+                                                    <connections>
+                                                        <action selector="tappedNegativeButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="zRZ-yO-owT"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="dSj-mt-nf9" firstAttribute="top" secondItem="sqW-2d-0kf" secondAttribute="top" constant="8" id="Plu-ir-u2S"/>
+                                                <constraint firstItem="dSj-mt-nf9" firstAttribute="centerX" secondItem="sqW-2d-0kf" secondAttribute="centerX" id="ghP-UA-bd8"/>
+                                                <constraint firstAttribute="bottom" secondItem="dSj-mt-nf9" secondAttribute="bottom" constant="8" id="pfp-ml-9Xw"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </stackView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WVG-7g-rgx">
+                                    <rect key="frame" x="0.0" y="385" width="375" height="20"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="ogs-Vj-nKS"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ym-Vc-45I" userLabel="ConfirmationButton" customClass="RSBorderedButton" customModule="ResearchSuiteExtensions">
+                    <rect key="frame" x="112.5" y="323" width="150" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="ruv-0h-jA7"/>
+                        <constraint firstAttribute="width" constant="150" id="yuX-Wo-F2b"/>
+                    </constraints>
+                    <state key="normal" title="Confirm"/>
+                    <connections>
+                        <action selector="tappedConfirmationButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="0MT-lN-AKP"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="N0p-f8-qL1" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="7lr-vY-xYq"/>
+                <constraint firstItem="N0p-f8-qL1" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="E66-Wj-RIU"/>
+                <constraint firstItem="zbT-V4-Bh3" firstAttribute="centerY" secondItem="9Ym-Vc-45I" secondAttribute="centerY" id="FXL-Eo-Qxz"/>
+                <constraint firstItem="N0p-f8-qL1" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="YB4-N5-x4c"/>
+                <constraint firstItem="N0p-f8-qL1" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="c57-Kr-cyp"/>
+                <constraint firstItem="zbT-V4-Bh3" firstAttribute="centerX" secondItem="9Ym-Vc-45I" secondAttribute="centerX" id="rDx-kS-kTA"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="affirmativeButton" destination="iAr-l0-ENg" id="URn-Pi-2o7"/>
+                <outlet property="confirmationButton" destination="9Ym-Vc-45I" id="VKj-e6-uzG"/>
+                <outlet property="crossImageView" destination="GJr-2O-fH6" id="K6h-nQ-kRa"/>
+                <outlet property="feedbackLabel" destination="rnm-BU-4oQ" id="buh-Fu-bzh"/>
+                <outlet property="negativeButton" destination="dSj-mt-nf9" id="zyZ-Jy-wSZ"/>
+                <outlet property="progressView" destination="fc4-5n-XiY" id="8Ce-cP-5Vf"/>
+                <outlet property="textLabel" destination="hZR-nn-KZE" id="nx6-3h-zdE"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="cross" width="250" height="250"/>
+    </resources>
+</document>
