@@ -44,9 +44,9 @@ TODO: Add long description of the pod here.
   s.dependency 'LS2SDK', '~> 0.10'
   s.dependency 'ResearchKit', '~> 1.5'
   s.dependency 'ResearchSuiteExtensions', '~> 0.19'
-  s.dependency 'ResearchSuiteTaskBuilder', '~> 0.12'
+  s.dependency 'ResearchSuiteTaskBuilder', '~> 0.13'
   s.dependency 'ResearchSuiteResultsProcessor', '~> 0.9'
-  s.dependency 'ResearchSuiteApplicationFramework', '~> 0.19'
+  s.dependency 'ResearchSuiteApplicationFramework', '~> 0.20'
   s.dependency 'SnapKit', '~> 4.0'
   s.resources = 'WSAP/Assets/Assets.xcassets'
 end
