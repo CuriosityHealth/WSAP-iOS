@@ -44,6 +44,36 @@ open class WSAPStepViewController: RSQuestionViewController {
         
         self.wsapView = wsapView
         
+        self.wsapView.crossImage = {
+            if let image = wsapStep.crossImage {
+                return image
+            }
+            else {
+                let bundle = Bundle(for: WSAPStepViewController.self)
+                return UIImage(named: "cross", in: bundle, compatibleWith: nil)
+            }
+        }()
+        
+        self.wsapView.correctImage = {
+            if let image = wsapStep.correctImage {
+                return image
+            }
+            else {
+                let bundle = Bundle(for: WSAPStepViewController.self)
+                return UIImage(named: "check", in: bundle, compatibleWith: nil)
+            }
+        }()
+        
+        self.wsapView.incorrectImage = {
+            if let image = wsapStep.incorrectImage {
+                return image
+            }
+            else {
+                let bundle = Bundle(for: WSAPStepViewController.self)
+                return UIImage(named: "x", in: bundle, compatibleWith: nil)
+            }
+        }()
+        
         self.wsapView.state = .cross
         self.wsapView.progress = 0.0
         self.wsapView.progressView.progressLabel.isHidden = true

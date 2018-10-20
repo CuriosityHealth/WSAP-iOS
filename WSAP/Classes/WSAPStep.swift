@@ -13,15 +13,24 @@ import ResearchSuiteExtensions
 open class WSAPStep: RSStep {
     
     open let trials: [WSAPTrial]
+    open let crossImage: UIImage?
+    open let correctImage: UIImage?
+    open let incorrectImage: UIImage?
     
     public init(
         identifier: String,
         title: String?,
         text: String?,
-        trials: [WSAPTrial]
+        trials: [WSAPTrial],
+        crossImage: UIImage?,
+        correctImage: UIImage?,
+        incorrectImage: UIImage?
         ) {
         
         self.trials = trials
+        self.crossImage = crossImage
+        self.correctImage = correctImage
+        self.incorrectImage = incorrectImage
         super.init(identifier: identifier)
         self.title = title
         self.text = text

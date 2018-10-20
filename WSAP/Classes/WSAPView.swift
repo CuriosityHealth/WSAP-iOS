@@ -38,6 +38,9 @@ open class WSAPView: UIView {
     
     @IBOutlet weak var confirmationButton: RSBorderedButton!
     
+    public var crossImage: UIImage!
+    public var incorrectImage: UIImage!
+    public var correctImage: UIImage!
     
     var trial: WSAPTrial!
 
@@ -66,14 +69,15 @@ open class WSAPView: UIView {
             }()
             
             self.crossImageView.image = {
-                let bundle = Bundle(for: WSAPView.self)
+//                let bundle = Bundle(for: WSAPView.self)
+                let bundle = Bundle.main
                 switch self.state {
                 case .correct:
-                    return UIImage(named: "check", in: bundle, compatibleWith: nil)
+                    return self.correctImage
                 case .incorrect:
-                    return UIImage(named: "x", in: bundle, compatibleWith: nil)
+                    return self.incorrectImage
                 case .cross:
-                    return UIImage(named: "cross", in: bundle, compatibleWith: nil)
+                    return self.crossImage
                 default:
                     return nil
                 }

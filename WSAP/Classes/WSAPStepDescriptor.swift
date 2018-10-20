@@ -19,6 +19,9 @@ open class WSAPStepDescriptor: RSTBStepDescriptor {
     public let affirmativeButtonText: String
     public let negativeButtonText: String
     public let numberOfSentences: Int?
+    public let crossImageName: String?
+    public let correctImageName: String?
+    public let incorrectImageName: String?
     
     public required init?(json: JSON) {
         
@@ -38,6 +41,9 @@ open class WSAPStepDescriptor: RSTBStepDescriptor {
         self.affirmativeButtonText = affirmativeButtonText
         self.negativeButtonText = negativeButtonText
         self.numberOfSentences = "numberOfSentences" <~~ json
+        self.crossImageName = "crossImage" <~~ json
+        self.correctImageName = "correctImage" <~~ json
+        self.incorrectImageName = "incorrectImage" <~~ json
         super.init(json: json)
     }
 

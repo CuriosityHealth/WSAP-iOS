@@ -48,4 +48,5 @@ TODO: Add long description of the pod here.
   s.dependency 'ResearchSuiteResultsProcessor', '~> 0.9'
   s.dependency 'ResearchSuiteApplicationFramework', '~> 0.19'
   s.dependency 'SnapKit', '~> 4.0'
+  s.resources = 'WSAP/Assets/Assets.xcassets'
 end
