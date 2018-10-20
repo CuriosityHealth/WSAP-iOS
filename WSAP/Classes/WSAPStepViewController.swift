@@ -81,14 +81,14 @@ open class WSAPStepViewController: RSQuestionViewController {
         self.wsapView.frame = self.contentView.bounds
 //        debugPrint(self.contentView)
         
-        let backgroundNotification: Notification.Name = UIApplication.didEnterBackgroundNotification
+        let backgroundNotification: Notification.Name = NSNotification.Name.UIApplicationDidEnterBackground
         self.backgroundObserver = NotificationCenter.default.addObserver(forName: backgroundNotification, object: nil, queue: nil) { [weak self] (notification) in
             
             self?.paused = true
             
         }
         
-        let foregroudNotification: Notification.Name = UIApplication.didBecomeActiveNotification
+        let foregroudNotification: Notification.Name = NSNotification.Name.UIApplicationDidBecomeActive
         self.foregroundObserver = NotificationCenter.default.addObserver(forName: foregroudNotification, object: nil, queue: nil) { [weak self] (notification) in
             
             self?.paused = false
