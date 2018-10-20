@@ -11,12 +11,13 @@ import Gloss
 import ResearchKit
 
 open class WSAPStepGenerator: RSTBBaseStepGenerator {
+   
+    public init() {}
     
-    public init(){}
-    
-    public var supportedTypes: [String]! {
+    open var supportedTypes: [String]! {
         return []
     }
+    
     
     open func generateTrials(jsonObject: JSON, helper: RSTBTaskBuilderHelper) -> [WSAPTrial]? {
         assertionFailure("Not Implemented!!")
