@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="NewWSAPView" customModule="WSAP" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="405"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UK5-ti-dpn">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="405"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RjB-r0-Gas">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="405"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mTm-Fq-bPq">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oPM-W7-0uN">
+                                            <rect key="frame" x="112.5" y="37.5" width="150" height="150"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="oPM-W7-0uN" secondAttribute="height" multiplier="1:1" id="E4I-IS-HgT"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lie-4r-e8D" userLabel="Text Label" customClass="WSAPLabel" customModule="WSAP" customModuleProvider="target">
+                                            <rect key="frame" x="157" y="97" width="61.5" height="31.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aux Text Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YaQ-DC-Xcc" customClass="WSAPFeedbackLabel" customModule="WSAP" customModuleProvider="target">
+                                            <rect key="frame" x="124.5" y="203.5" width="126" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="Lie-4r-e8D" firstAttribute="centerX" secondItem="mTm-Fq-bPq" secondAttribute="centerX" id="4YW-8S-Oxf"/>
+                                        <constraint firstItem="oPM-W7-0uN" firstAttribute="centerX" secondItem="mTm-Fq-bPq" secondAttribute="centerX" id="CV2-zP-PVX"/>
+                                        <constraint firstItem="Lie-4r-e8D" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mTm-Fq-bPq" secondAttribute="top" priority="500" constant="8" id="CrF-sB-Fni"/>
+                                        <constraint firstItem="oPM-W7-0uN" firstAttribute="centerY" secondItem="mTm-Fq-bPq" secondAttribute="centerY" id="Iii-sm-ido"/>
+                                        <constraint firstItem="Lie-4r-e8D" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mTm-Fq-bPq" secondAttribute="leading" constant="20" id="KLq-0m-375"/>
+                                        <constraint firstItem="YaQ-DC-Xcc" firstAttribute="top" secondItem="oPM-W7-0uN" secondAttribute="bottom" constant="16" id="OHO-Pf-BG5"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Lie-4r-e8D" secondAttribute="trailing" priority="100" constant="20" id="Smn-N5-FdS"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Lie-4r-e8D" secondAttribute="bottom" priority="500" constant="8" id="Tnw-6E-doi"/>
+                                        <constraint firstItem="oPM-W7-0uN" firstAttribute="width" secondItem="mTm-Fq-bPq" secondAttribute="width" multiplier="0.4" id="c4p-zk-4vP"/>
+                                        <constraint firstItem="Lie-4r-e8D" firstAttribute="centerY" secondItem="mTm-Fq-bPq" secondAttribute="centerY" id="cZo-PK-hpK"/>
+                                        <constraint firstItem="YaQ-DC-Xcc" firstAttribute="centerX" secondItem="mTm-Fq-bPq" secondAttribute="centerX" id="tPs-gr-pFm"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbe-38-ySq" customClass="WSAPProgressView" customModule="WSAP" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="225" width="375" height="100"/>
+                                    <color key="backgroundColor" red="0.59999999999999998" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="Rg3-N2-c5y"/>
+                                    </constraints>
+                                </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="iD4-oO-CkX" userLabel="ButtonStackView">
+                                    <rect key="frame" x="0.0" y="325" width="375" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="XNc-Ma-lGG"/>
+                                    </constraints>
+                                </stackView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2wn-bg-5R6">
+                                    <rect key="frame" x="0.0" y="385" width="375" height="20"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="2oL-tZ-sf5"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="YAz-Zy-PBq"/>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="UK5-ti-dpn" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="4aB-1w-5C3"/>
+                <constraint firstItem="UK5-ti-dpn" firstAttribute="width" secondItem="vUN-kp-3ea" secondAttribute="width" id="71n-OK-PXG"/>
+                <constraint firstItem="UK5-ti-dpn" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Gy9-F2-vNJ"/>
+                <constraint firstItem="UK5-ti-dpn" firstAttribute="height" secondItem="vUN-kp-3ea" secondAttribute="height" id="fg8-Rv-bt3"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="buttonStackView" destination="iD4-oO-CkX" id="fmc-nJ-Pq1"/>
+                <outlet property="imageView" destination="oPM-W7-0uN" id="LmP-4j-opw"/>
+                <outlet property="primaryTextLabel" destination="Lie-4r-e8D" id="8S2-MP-8hm"/>
+                <outlet property="progressView" destination="fbe-38-ySq" id="icv-wY-BJk"/>
+                <outlet property="secondaryTextLabel" destination="YaQ-DC-Xcc" id="ztO-d3-YpX"/>
+            </connections>
+            <point key="canvasLocation" x="201.59999999999999" y="23.838080959520241"/>
+        </view>
+    </objects>
+</document>

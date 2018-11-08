@@ -12,7 +12,10 @@ import ResearchSuiteExtensions
 
 open class WSAPStepViewController: RSQuestionViewController {
 
-    weak var wsapView: WSAPView!
+    weak var wsapView: NewWSAPView!
+    var wsapStep: WSAPStep! {
+        return self.step as! WSAPStep
+    }
     
     var trials: [WSAPTrial]?
     var trialResults: [WSAPTrialResult]?
@@ -30,12 +33,72 @@ open class WSAPStepViewController: RSQuestionViewController {
         return false
     }
     
+    
+    open func initializeImageMap() {
+        self.images = {
+            var map: [String: UIImage] = [:]
+            map["cross"] = {
+                if let image = self.wsapStep.crossImage {
+                    return image
+                }
+                else {
+                    let bundle = Bundle(for: WSAPStepViewController.self)
+                    return UIImage(named: "cross", in: bundle, compatibleWith: nil)
+                }
+            }()
+            
+            map["correct"] = {
+                if let image = self.wsapStep.correctImage {
+                    return image
+                }
+                else {
+                    let bundle = Bundle(for: WSAPStepViewController.self)
+                    return UIImage(named: "check", in: bundle, compatibleWith: nil)
+                }
+            }()
+            
+            map["incorrect"] = {
+                if let image = self.wsapStep.incorrectImage {
+                    return image
+                }
+                else {
+                    let bundle = Bundle(for: WSAPStepViewController.self)
+                    return UIImage(named: "x", in: bundle, compatibleWith: nil)
+                }
+            }()
+            
+            return map
+        }()
+    }
+    
+    var images: [String: UIImage]?
+    
+    open func image(named imageName: String) -> UIImage? {
+        
+        if self.images == nil {
+            self.initializeImageMap()
+        }
+        
+        if let image = self.images?[imageName] {
+            return image
+        }
+        else {
+            return UIImage(named: imageName)
+        }
+    }
+    
     override open func viewDidLoad() {
         super.viewDidLoad()
         
         let bundle = Bundle(for: WSAPStepViewController.self)
-        guard let views = bundle.loadNibNamed("WSAPView", owner: nil, options: nil),
-            let wsapView = views.first as? WSAPView,
+//        guard let views = bundle.loadNibNamed("WSAPView", owner: nil, options: nil),
+//            let wsapView = views.first as? WSAPView,
+//            let wsapStep = self.step as? WSAPStep else {
+//                fatalError()
+//        }
+        
+        guard let views = bundle.loadNibNamed("NewWSAPView", owner: nil, options: nil),
+            let wsapView = views.first as? NewWSAPView,
             let wsapStep = self.step as? WSAPStep else {
                 fatalError()
         }
@@ -44,37 +107,37 @@ open class WSAPStepViewController: RSQuestionViewController {
         
         self.wsapView = wsapView
         
-        self.wsapView.crossImage = {
-            if let image = wsapStep.crossImage {
-                return image
-            }
-            else {
-                let bundle = Bundle(for: WSAPStepViewController.self)
-                return UIImage(named: "cross", in: bundle, compatibleWith: nil)
-            }
-        }()
-        
-        self.wsapView.correctImage = {
-            if let image = wsapStep.correctImage {
-                return image
-            }
-            else {
-                let bundle = Bundle(for: WSAPStepViewController.self)
-                return UIImage(named: "check", in: bundle, compatibleWith: nil)
-            }
-        }()
-        
-        self.wsapView.incorrectImage = {
-            if let image = wsapStep.incorrectImage {
-                return image
-            }
-            else {
-                let bundle = Bundle(for: WSAPStepViewController.self)
-                return UIImage(named: "x", in: bundle, compatibleWith: nil)
-            }
-        }()
-        
-        self.wsapView.state = .cross
+//        self.wsapView.crossImage = {
+//            if let image = wsapStep.crossImage {
+//                return image
+//            }
+//            else {
+//                let bundle = Bundle(for: WSAPStepViewController.self)
+//                return UIImage(named: "cross", in: bundle, compatibleWith: nil)
+//            }
+//        }()
+//
+//        self.wsapView.correctImage = {
+//            if let image = wsapStep.correctImage {
+//                return image
+//            }
+//            else {
+//                let bundle = Bundle(for: WSAPStepViewController.self)
+//                return UIImage(named: "check", in: bundle, compatibleWith: nil)
+//            }
+//        }()
+//
+//        self.wsapView.incorrectImage = {
+//            if let image = wsapStep.incorrectImage {
+//                return image
+//            }
+//            else {
+//                let bundle = Bundle(for: WSAPStepViewController.self)
+//                return UIImage(named: "x", in: bundle, compatibleWith: nil)
+//            }
+//        }()
+//
+//        self.wsapView.state = .cross
         self.wsapView.progress = 0.0
         self.wsapView.progressView.progressLabel.isHidden = true
         self.contentView.addSubview(self.wsapView)
@@ -204,57 +267,105 @@ open class WSAPStepViewController: RSQuestionViewController {
             deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
     
+    func doTrialComponent(delegate: WSAPTrialDelegate, trialComponent: WSAPTrialComponent, trialComponentResults: [WSAPTrialComponentResult], completion: @escaping ([WSAPTrialComponentResult]) -> ()) {
+        
+        //next, update presentation and continuation
+        self.wsapView.updateForTrialComponent(trialComponent: trialComponent) { (outcome) in
+            
+            //when continuation completes, get next trial part from delegate, generate trial part result
+            //if there is a next trial part, recurse
+            //otherwise, call completion
+            
+            let trialComponentResult = WSAPTrialComponentResult(
+                trialComponent: trialComponent,
+                trialComponentOutcome: outcome
+            )
+            
+            let results = trialComponentResults + [trialComponentResult]
+            if let nextTrialComponent = delegate.trialComponent(after: trialComponent, with: results, viewController: self) {
+                self.doTrialComponent(delegate: delegate, trialComponent: nextTrialComponent, trialComponentResults: results, completion: completion)
+            }
+            else {
+                completion(results)
+            }
+            
+        }
+        
+    }
+    
     func doTrial(trialIndex: Int, trial: WSAPTrial, completion: @escaping (WSAPTrialResult) -> ()) {
         
 //        debugPrint(self.contentView)
 //        debugPrint(self.wsapView)
         
-        self.wsapView.configureForTrial(trial: trial)
-        self.wsapView.state = .cross
+//        self.wsapView.configureForTrial(trial: trial)
+//        self.wsapView.state = .cross
         
-        let wsapView: WSAPView = self.wsapView
-        let delay = self.delay
+//        let wsapView: WSAPxView = self.wsapView
+//        let delay = self.delay
         
-        
-        
-        delay(trial.crossTime) {
-            
-            wsapView.state = .word
-            delay(trial.wordTime) {
+        let delegate: WSAPTrialDelegate = trial
+        let firstTrialComponent: WSAPTrialComponent = delegate.trialComponent(after: nil, with: nil, viewController: self)!
+        self.doTrialComponent(
+            delegate: delegate,
+            trialComponent: firstTrialComponent,
+            trialComponentResults: []) { trialComponentResults in
                 
-                //set up for sentence
+                let trialResult: WSAPTrialResult = delegate.trialResult(trial: trial, trialIndex: trialIndex, trialComponentResults: trialComponentResults)!
+                completion(trialResult)
                 
-                let startTime = Date()
-                wsapView.onResponse = { _, response in
-                    
-                    let endTime = Date()
-                    let responseTime = endTime.timeIntervalSince(startTime)
-                    
-                    let trialResult = WSAPTrialResult(
-                        trial: trial,
-                        index: trialIndex,
-                        responseTime: responseTime,
-                        response: response
-                    )
-                    
-                    if trial.confirmation == nil {
-                        completion(trialResult)
-                    }
-                    else {
-                        wsapView.onConfirm = { _ in
-                            completion(trialResult)
-                        }
-                        
-                        wsapView.state = (response == trial.correctResponse) ? .correct : .incorrect
-                    }
-                    
-                }
-                
-                wsapView.state = .sentence
-                
-            }
-            
         }
+        
+        //ask delegate for first trial result
+//        let firstTrialPart = WSAPTrialPart(identifier: "first")
+//        let firstTrialComponent =
+//        self.doTrialPart(trialPart: firstTrialPart) { trialPartResults in
+//            
+//            //once trial parts have been completed, ask delegate to generate a result for these trial parts
+//            
+//            
+//        }
+        
+        
+        
+//        delay(trial.crossTime) {
+//
+//            wsapView.state = .word
+//            delay(trial.wordTime) {
+//
+//                //set up for sentence
+//
+//                let startTime = Date()
+//                wsapView.onResponse = { _, response in
+//
+//                    let endTime = Date()
+//                    let responseTime = endTime.timeIntervalSince(startTime)
+//
+//                    let trialResult = WSAPTrialResult(
+//                        trial: trial,
+//                        index: trialIndex,
+//                        responseTime: responseTime,
+//                        response: response
+//                    )
+//
+//                    if trial.confirmation == nil {
+//                        completion(trialResult)
+//                    }
+//                    else {
+//                        wsapView.onConfirm = { _ in
+//                            completion(trialResult)
+//                        }
+//
+//                        wsapView.state = (response == trial.correctResponse) ? .correct : .incorrect
+//                    }
+//
+//                }
+//
+//                wsapView.state = .sentence
+//
+//            }
+//
+//        }
         
     }
     
