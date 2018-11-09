@@ -9,16 +9,16 @@
 import UIKit
 import Gloss
 
-public struct WSAPTrialResult: Gloss.JSONEncodable, Swift.Encodable {
+open class WSAPTrialResult: NSObject, Gloss.JSONEncodable, Swift.Encodable {
     
-    private typealias EncodeClosure = (String, Any)->()
+    public typealias EncodeClosure = (String, Any)->()
     
-    private func abstractEncode(encodeClosure: EncodeClosure) {
+    open func abstractEncode(encodeClosure: EncodeClosure) {
+        
+//        assertionFailure("Not Implemented")
         encodeClosure("identifier", self.trial.trialId)
         encodeClosure("index", self.index)
-        encodeClosure("response_time", self.responseTime)
-        encodeClosure("actual_response", self.response.rawValue)
-        encodeClosure("correct_response", self.trial.correctResponse.rawValue)
+        
     }
     
     public func toJSON() -> JSON? {
@@ -43,10 +43,25 @@ public struct WSAPTrialResult: Gloss.JSONEncodable, Swift.Encodable {
         self.abstractEncode(encodeClosure: encodeClosure)
     }
     
+    open var isCorrect: Bool {
+        assertionFailure("Not Implemented")
+        return false
+    }
+    
+    open var measuredResponseTime: TimeInterval {
+        assertionFailure("Not Implemented")
+        return Double.infinity
+    }
+    
     public let trial: WSAPTrial
     public let index: Int
-    public let responseTime: TimeInterval
-    public let response: WSAPTrialResponseType
     
-    
+    public init(
+        index: Int,
+        trial: WSAPTrial
+        ) {
+        self.index = index
+        self.trial = trial
+        super.init()
+    }
 }

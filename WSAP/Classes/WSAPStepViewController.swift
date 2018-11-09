@@ -27,8 +27,6 @@ open class WSAPStepViewController: RSQuestionViewController {
     var backgroundObserver: NSObjectProtocol!
     var foregroundObserver: NSObjectProtocol!
     
-    var responseHandler:((WSAPTrialResponseType) -> Void)?
-    
     open override class var showsContinueButton: Bool {
         return false
     }
@@ -267,7 +265,7 @@ open class WSAPStepViewController: RSQuestionViewController {
             deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
     
-    func doTrialComponent(delegate: WSAPTrialDelegate, trialComponent: WSAPTrialComponent, trialComponentResults: [WSAPTrialComponentResult], completion: @escaping ([WSAPTrialComponentResult]) -> ()) {
+    func doTrialComponent(trial: WSAPTrial, delegate: WSAPTrialDelegate, trialComponent: WSAPTrialComponent, trialComponentResults: [WSAPTrialComponentResult], completion: @escaping ([WSAPTrialComponentResult]) -> ()) {
         
         //next, update presentation and continuation
         self.wsapView.updateForTrialComponent(trialComponent: trialComponent) { (outcome) in
@@ -282,8 +280,8 @@ open class WSAPStepViewController: RSQuestionViewController {
             )
             
             let results = trialComponentResults + [trialComponentResult]
-            if let nextTrialComponent = delegate.trialComponent(after: trialComponent, with: results, viewController: self) {
-                self.doTrialComponent(delegate: delegate, trialComponent: nextTrialComponent, trialComponentResults: results, completion: completion)
+            if let nextTrialComponent = delegate.trialComponent(trial: trial, lastTrialComponent: trialComponent, trialComponentResults: results, viewController: self) {
+                self.doTrialComponent(trial: trial, delegate: delegate, trialComponent: nextTrialComponent, trialComponentResults: results, completion: completion)
             }
             else {
                 completion(results)
@@ -293,20 +291,17 @@ open class WSAPStepViewController: RSQuestionViewController {
         
     }
     
+    open func trialDelegate(for trial: WSAPTrial) -> WSAPTrialDelegate {
+        return trial.trialDelegate()
+    }
+    
     func doTrial(trialIndex: Int, trial: WSAPTrial, completion: @escaping (WSAPTrialResult) -> ()) {
         
-//        debugPrint(self.contentView)
-//        debugPrint(self.wsapView)
+        let delegate: WSAPTrialDelegate = self.trialDelegate(for: trial)
+        let firstTrialComponent: WSAPTrialComponent = delegate.trialComponent(trial: trial, lastTrialComponent: nil, trialComponentResults: nil, viewController: self)!
         
-//        self.wsapView.configureForTrial(trial: trial)
-//        self.wsapView.state = .cross
-        
-//        let wsapView: WSAPxView = self.wsapView
-//        let delay = self.delay
-        
-        let delegate: WSAPTrialDelegate = trial
-        let firstTrialComponent: WSAPTrialComponent = delegate.trialComponent(after: nil, with: nil, viewController: self)!
         self.doTrialComponent(
+            trial: trial,
             delegate: delegate,
             trialComponent: firstTrialComponent,
             trialComponentResults: []) { trialComponentResults in
@@ -315,57 +310,6 @@ open class WSAPStepViewController: RSQuestionViewController {
                 completion(trialResult)
                 
         }
-        
-        //ask delegate for first trial result
-//        let firstTrialPart = WSAPTrialPart(identifier: "first")
-//        let firstTrialComponent =
-//        self.doTrialPart(trialPart: firstTrialPart) { trialPartResults in
-//            
-//            //once trial parts have been completed, ask delegate to generate a result for these trial parts
-//            
-//            
-//        }
-        
-        
-        
-//        delay(trial.crossTime) {
-//
-//            wsapView.state = .word
-//            delay(trial.wordTime) {
-//
-//                //set up for sentence
-//
-//                let startTime = Date()
-//                wsapView.onResponse = { _, response in
-//
-//                    let endTime = Date()
-//                    let responseTime = endTime.timeIntervalSince(startTime)
-//
-//                    let trialResult = WSAPTrialResult(
-//                        trial: trial,
-//                        index: trialIndex,
-//                        responseTime: responseTime,
-//                        response: response
-//                    )
-//
-//                    if trial.confirmation == nil {
-//                        completion(trialResult)
-//                    }
-//                    else {
-//                        wsapView.onConfirm = { _ in
-//                            completion(trialResult)
-//                        }
-//
-//                        wsapView.state = (response == trial.correctResponse) ? .correct : .incorrect
-//                    }
-//
-//                }
-//
-//                wsapView.state = .sentence
-//
-//            }
-//
-//        }
         
     }
     

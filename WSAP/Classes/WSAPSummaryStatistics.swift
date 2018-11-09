@@ -79,10 +79,10 @@ open class WSAPSummaryStatistics: RSRPIntermediateResult, RSRPFrontEndTransforme
                 return nil
         }
         
-        let correctAnswers = trialResults.filter { $0.response == $0.trial.correctResponse }
+        let correctAnswers = trialResults.filter { $0.isCorrect }
         let ratioCorrect: Double = Double(correctAnswers.count) / Double(trialResults.count)
         
-        let totalResponseTime: TimeInterval = trialResults.map { $0.responseTime }.reduce(0.0, +)
+        let totalResponseTime: TimeInterval = trialResults.map { $0.measuredResponseTime }.reduce(0.0, +)
         let averageResponseTime: TimeInterval = totalResponseTime / TimeInterval(trialResults.count)
         
         let summaryStats = WSAPSummaryStatisticsStruct.init(
