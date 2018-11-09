@@ -12,7 +12,7 @@ import ResearchSuiteExtensions
 
 open class WSAPStepViewController: RSQuestionViewController {
 
-    weak var wsapView: NewWSAPView!
+    weak var wsapView: WSAPView!
     var wsapStep: WSAPStep! {
         return self.step as! WSAPStep
     }
@@ -97,8 +97,8 @@ open class WSAPStepViewController: RSQuestionViewController {
 //                fatalError()
 //        }
         
-        guard let views = bundle.loadNibNamed("NewWSAPView", owner: nil, options: nil),
-            let wsapView = views.first as? NewWSAPView,
+        guard let views = bundle.loadNibNamed("WSAPView", owner: nil, options: nil),
+            let wsapView = views.first as? WSAPView,
             let wsapStep = self.step as? WSAPStep else {
                 fatalError()
         }

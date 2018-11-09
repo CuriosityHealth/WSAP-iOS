@@ -1,5 +1,5 @@
 //
-//  NewWSAPView.swift
+//  WSAPView.swift
 //  WSAP
 //
 //  Created by James Kizer on 11/7/18.
@@ -9,7 +9,7 @@ import UIKit
 import ResearchSuiteExtensions
 import SnapKit
 
-open class NewWSAPView: UIView {
+open class WSAPView: UIView {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var primaryTextLabel: WSAPLabel!
