@@ -34,41 +34,26 @@ open class WSAPStepGenerator: RSTBBaseStepGenerator {
             return nil
         }
         
-        let crossImage: UIImage? = {
-            if let imageName = stepDescriptor.crossImageName {
-                return UIImage(named: imageName)
+        let imageMapPairs: [(String, UIImage)] = stepDescriptor.imageNameMap?.compactMap({ (pair) -> (String, UIImage)? in
+            if let image = UIImage(named: pair.value) {
+                return (pair.key, image)
             }
             else {
                 return nil
             }
-        }()
+        }) ?? []
         
-        let correctImage: UIImage? = {
-            if let imageName = stepDescriptor.correctImageName {
-                return UIImage(named: imageName)
-            }
-            else {
-                return nil
-            }
-        }()
-        
-        let incorrectImage: UIImage? = {
-            if let imageName = stepDescriptor.incorrectImageName {
-                return UIImage(named: imageName)
-            }
-            else {
-                return nil
-            }
-        }()
+        let imageMap: [String: UIImage] = Dictionary.init(uniqueKeysWithValues: imageMapPairs)
         
         let step = WSAPStep(
             identifier: stepDescriptor.identifier,
             title: stepDescriptor.title,
             text: stepDescriptor.text,
             trials: trials,
-            crossImage: crossImage,
-            correctImage: correctImage,
-            incorrectImage: incorrectImage
+            imageMap: imageMap
+//            crossImage: crossImage,
+//            correctImage: correctImage,
+//            incorrectImage: incorrectImage
         )
         
         step.isOptional = stepDescriptor.optional

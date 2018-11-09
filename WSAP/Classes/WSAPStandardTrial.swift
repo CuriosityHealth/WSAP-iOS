@@ -80,6 +80,7 @@ public class WSAPStandardTrialDelegate: WSAPTrialDelegate {
     public func trialComponent(trial: WSAPTrial, lastTrialComponent: WSAPTrialComponent?, trialComponentResults: [WSAPTrialComponentResult]?, viewController: WSAPStepViewController) -> WSAPTrialComponent? {
         
         guard let trial = trial as? WSAPStandardTrial else {
+            assertionFailure("Trial must be a standard trial")
             return nil
         }
         

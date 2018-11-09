@@ -31,53 +31,9 @@ open class WSAPStepViewController: RSQuestionViewController {
         return false
     }
     
-    
-    open func initializeImageMap() {
-        self.images = {
-            var map: [String: UIImage] = [:]
-            map["cross"] = {
-                if let image = self.wsapStep.crossImage {
-                    return image
-                }
-                else {
-                    let bundle = Bundle(for: WSAPStepViewController.self)
-                    return UIImage(named: "cross", in: bundle, compatibleWith: nil)
-                }
-            }()
-            
-            map["correct"] = {
-                if let image = self.wsapStep.correctImage {
-                    return image
-                }
-                else {
-                    let bundle = Bundle(for: WSAPStepViewController.self)
-                    return UIImage(named: "check", in: bundle, compatibleWith: nil)
-                }
-            }()
-            
-            map["incorrect"] = {
-                if let image = self.wsapStep.incorrectImage {
-                    return image
-                }
-                else {
-                    let bundle = Bundle(for: WSAPStepViewController.self)
-                    return UIImage(named: "x", in: bundle, compatibleWith: nil)
-                }
-            }()
-            
-            return map
-        }()
-    }
-    
-    var images: [String: UIImage]?
-    
     open func image(named imageName: String) -> UIImage? {
         
-        if self.images == nil {
-            self.initializeImageMap()
-        }
-        
-        if let image = self.images?[imageName] {
+        if let image = self.wsapStep.imageMap[imageName] {
             return image
         }
         else {
