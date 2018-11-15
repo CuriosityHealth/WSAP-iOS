@@ -15,9 +15,10 @@ public enum WSAPWordSelectionTrialResponseType: String, Codable {
 open class WSAPWordSelectionTrial: WSAPTrial {
     public let leftWord: String
     public let rightWord: String
-    public let wordSelectionPrompt: String
+//    public let wordSelectionPrompt: String
     public let sentence: String
-    public let sentenceButtonText: String
+//    public let sentenceButtonText: String
+    public let sentenceTime: TimeInterval
     public let crossTime: TimeInterval
     public let correctResponse: WSAPWordSelectionTrialResponseType
     
@@ -27,9 +28,10 @@ open class WSAPWordSelectionTrial: WSAPTrial {
         trialId: String,
         leftWord: String,
         rightWord: String,
-        wordSelectionPrompt: String,
+//        wordSelectionPrompt: String,
         sentence: String,
-        sentenceButtonText: String,
+//        sentenceButtonText: String,
+        sentenceTime: TimeInterval,
         crossTime: TimeInterval,
         correctResponse: WSAPWordSelectionTrialResponseType,
         feedback: WSAPTrialFeedback?
@@ -37,9 +39,10 @@ open class WSAPWordSelectionTrial: WSAPTrial {
         
         self.leftWord = leftWord
         self.rightWord = rightWord
-        self.wordSelectionPrompt = wordSelectionPrompt
+//        self.wordSelectionPrompt = wordSelectionPrompts
         self.sentence = sentence
-        self.sentenceButtonText = sentenceButtonText
+//        self.sentenceButtonText = sentenceButtonText
+        self.sentenceTime = sentenceTime
         self.crossTime = crossTime
         self.correctResponse = correctResponse
         self.feedback = feedback

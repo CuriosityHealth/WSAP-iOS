@@ -44,14 +44,10 @@ public class WSAPWordSelectionTrialDelegate: WSAPTrialDelegate {
         //then, present sentence
         case "cross":
             
-            let buttons: [(String, String)] = [
-                ("sentenceButton", trial.sentenceButtonText)
-            ]
-            
             return WSAPTrialComponent(
                 identifier: "sentence",
                 presentation: .text(trial.sentence),
-                continuation: .buttons(buttons)
+                continuation: .timed(trial.sentenceTime)
             )
             
         //then present words for selection
@@ -64,7 +60,7 @@ public class WSAPWordSelectionTrialDelegate: WSAPTrialDelegate {
             
             return WSAPTrialComponent(
                 identifier: "words",
-                presentation: .text(trial.wordSelectionPrompt),
+                presentation: .text(trial.sentence),
                 continuation: .buttons(buttons)
             )
             
@@ -148,21 +144,21 @@ public class WSAPWordSelectionTrialDelegate: WSAPTrialDelegate {
     public func trialResult(trial: WSAPTrial, trialIndex: Int, trialComponentResults: [WSAPTrialComponentResult]) -> WSAPTrialResult? {
         
         guard let trial = trial as? WSAPWordSelectionTrial,
-            let sentenceComponentResult = trialComponentResults.first(where: {$0.trialComponent.identifier == "sentence"}),
+//            let sentenceComponentResult = trialComponentResults.first(where: {$0.trialComponent.identifier == "sentence"}),
             let wordsComponentResult = trialComponentResults.first(where: {$0.trialComponent.identifier == "words"}) else {
                 return nil
         }
         
-        let sentenceResponseTimeOpt: TimeInterval? = {
-            switch sentenceComponentResult.trialComponentOutcome {
-                
-            case .buttonPressed(_, let duration):
-                return duration
-                
-            default:
-                return nil
-            }
-        }()
+//        let sentenceResponseTimeOpt: TimeInterval? = {
+//            switch sentenceComponentResult.trialComponentOutcome {
+//
+//            case .buttonPressed(_, let duration):
+//                return duration
+//
+//            default:
+//                return nil
+//            }
+//        }()
         
         let pairOpt: (WSAPWordSelectionTrialResponseType, TimeInterval)?  = {
             switch wordsComponentResult.trialComponentOutcome {
@@ -180,15 +176,19 @@ public class WSAPWordSelectionTrialDelegate: WSAPTrialDelegate {
             
         }()
         
-        guard let sentenceResponseTime = sentenceResponseTimeOpt,
-            let pair = pairOpt else {
-            return nil
+//        guard let sentenceResponseTime = sentenceResponseTimeOpt,
+//            let pair = pairOpt else {
+//            return nil
+//        }
+
+        guard let pair = pairOpt else {
+                return nil
         }
         
         return WSAPWordSelectionTrialResult(
             index: trialIndex,
             trial: trial,
-            sentenceResponseTime: sentenceResponseTime,
+//            sentenceResponseTime: sentenceResponseTime,
             wordsResponseTime: pair.1,
             response: pair.0
         )

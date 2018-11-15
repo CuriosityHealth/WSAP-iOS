@@ -11,7 +11,7 @@ open class WSAPWordSelectionTrialResult: WSAPTrialResult {
     
     override open func abstractEncode(encodeClosure: (String, Any) -> ()) {
         super.abstractEncode(encodeClosure: encodeClosure)
-        encodeClosure("sentence_response_time", self.sentenceResponseTime)
+//        encodeClosure("sentence_response_time", self.sentenceResponseTime)
         encodeClosure("words_response_time", self.wordsResponseTime)
         encodeClosure("left_word", self.wordSelectionTrial.leftWord)
         encodeClosure("right_word", self.wordSelectionTrial.rightWord)
@@ -27,7 +27,7 @@ open class WSAPWordSelectionTrialResult: WSAPTrialResult {
         return self.wordsResponseTime
     }
     
-    public let sentenceResponseTime: TimeInterval
+//    public let sentenceResponseTime: TimeInterval
     public let wordsResponseTime: TimeInterval
     public let response: WSAPWordSelectionTrialResponseType
     public var wordSelectionTrial: WSAPWordSelectionTrial {
@@ -37,11 +37,11 @@ open class WSAPWordSelectionTrialResult: WSAPTrialResult {
     public init(
         index: Int,
         trial: WSAPWordSelectionTrial,
-        sentenceResponseTime: TimeInterval,
+//        sentenceResponseTime: TimeInterval,
         wordsResponseTime: TimeInterval,
         response: WSAPWordSelectionTrialResponseType
         ) {
-        self.sentenceResponseTime = sentenceResponseTime
+//        self.sentenceResponseTime = sentenceResponseTime
         self.wordsResponseTime = wordsResponseTime
         self.response = response
         super.init(index: index, trial: trial)
