@@ -18,7 +18,8 @@ open class WSAPReverseOrderStepDescriptor: WSAPStepDescriptor {
     public let choicePrompt: String
     public let affirmativeButtonText: String
     public let negativeButtonText: String
-    public let numberOfSentences: Int?
+    public let numberOfItems: Int?
+    public let numberOfItemsKey: String?
     
     public required init?(json: JSON) {
         
@@ -39,7 +40,8 @@ open class WSAPReverseOrderStepDescriptor: WSAPStepDescriptor {
         self.choicePrompt = choicePrompt
         self.affirmativeButtonText = affirmativeButtonText
         self.negativeButtonText = negativeButtonText
-        self.numberOfSentences = "numberOfSentences" <~~ json
+        self.numberOfItems = "numberOfItems" <~~ json
+        self.numberOfItemsKey = "numberOfItemsKey" <~~ json
         super.init(json: json)
     }
     

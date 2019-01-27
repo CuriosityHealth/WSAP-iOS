@@ -14,7 +14,8 @@ open class WSAPWordSelectionStepDescriptor: WSAPStepDescriptor {
     public let crossTime: TimeInterval
     public let sentenceTime: TimeInterval
 //    public let wordSelectionPrompt: String
-    public let numberOfSentences: Int?
+    public let numberOfItems: Int?
+    public let numberOfItemsKey: String?
     
     public required init?(json: JSON) {
         
@@ -25,7 +26,8 @@ open class WSAPWordSelectionStepDescriptor: WSAPStepDescriptor {
         
         self.crossTime = crossTime
         self.sentenceTime = sentenceTime
-        self.numberOfSentences = "numberOfSentences" <~~ json
+        self.numberOfItems = "numberOfItems" <~~ json
+        self.numberOfItemsKey = "numberOfItemsKey" <~~ json
         super.init(json: json)
     }
     
