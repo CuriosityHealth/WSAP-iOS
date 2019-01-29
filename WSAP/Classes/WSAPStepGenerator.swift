@@ -24,6 +24,22 @@ open class WSAPStepGenerator: RSTBBaseStepGenerator {
         return nil
     }
     
+    open func createStep(
+        identifier: String,
+        title: String?,
+        text: String?,
+        trials: [WSAPTrial],
+        imageMap: [String: UIImage]
+        ) -> WSAPStep {
+        return WSAPStep(
+            identifier: identifier,
+            title: title,
+            text: text,
+            trials: trials,
+            imageMap: imageMap
+        )
+    }
+    
     open func generateStep(type: String, jsonObject: JSON, helper: RSTBTaskBuilderHelper) -> ORKStep? {
         
         guard let stepDescriptor = WSAPStepDescriptor(json: jsonObject) else {
@@ -45,15 +61,12 @@ open class WSAPStepGenerator: RSTBBaseStepGenerator {
         
         let imageMap: [String: UIImage] = Dictionary.init(uniqueKeysWithValues: imageMapPairs)
         
-        let step = WSAPStep(
+        let step = self.createStep(
             identifier: stepDescriptor.identifier,
             title: stepDescriptor.title,
             text: stepDescriptor.text,
             trials: trials,
             imageMap: imageMap
-//            crossImage: crossImage,
-//            correctImage: correctImage,
-//            incorrectImage: incorrectImage
         )
         
         step.isOptional = stepDescriptor.optional

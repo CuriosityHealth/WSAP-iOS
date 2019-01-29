@@ -12,8 +12,8 @@ import ResearchSuiteExtensions
 
 open class WSAPStep: RSStep {
     
-    open let trials: [WSAPTrial]
-    open let imageMap: [String: UIImage]
+    public let trials: [WSAPTrial]
+    public let imageMap: [String: UIImage]
     
     public init(
         identifier: String,
@@ -37,5 +37,15 @@ open class WSAPStep: RSStep {
     open override func stepViewControllerClass() -> AnyClass {
         return WSAPStepViewController.self
     }
-
+    
+    open func shouldEnd(startTime: Date, interruptionCount: Int) -> Bool {
+        return false
+    }
+    
+    open func interruptionAlertTitleAndMessage(startTime: Date, interruptionCount: Int) -> (String, String) {
+        let title = "An Interruption Occurred"
+        let message = "Please finish the task in a more timely fashion."
+        return (title, message)
+    }
+    
 }

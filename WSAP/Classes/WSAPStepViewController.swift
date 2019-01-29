@@ -27,6 +27,10 @@ open class WSAPStepViewController: RSQuestionViewController {
     var backgroundObserver: NSObjectProtocol!
     var foregroundObserver: NSObjectProtocol!
     
+    var startTime: Date = Date()
+    var interruptionCount = 0
+    var completed: Bool = false
+    
     open override class var showsContinueButton: Bool {
         return false
     }
@@ -102,6 +106,14 @@ open class WSAPStepViewController: RSQuestionViewController {
         self.backgroundObserver = NotificationCenter.default.addObserver(forName: backgroundNotification, object: nil, queue: nil) { [weak self] (notification) in
             
             self?.paused = true
+            self?.interruptionCount = {
+                if let interruptionCount = self?.interruptionCount {
+                    return interruptionCount + 1
+                }
+                else {
+                    return 1
+                }
+            }()
             
         }
         
@@ -142,6 +154,31 @@ open class WSAPStepViewController: RSQuestionViewController {
 //        }
 //    }
     
+    open func shouldEnd(startTime: Date, interruptionCount: Int) -> Bool {
+        return self.wsapStep.shouldEnd(startTime: startTime, interruptionCount: interruptionCount)
+    }
+    
+    open func presentInterruptionAlert(startTime: Date, interruptionCount: Int, completion: @escaping () -> ()) {
+        
+        let (title, message) = self.wsapStep.interruptionAlertTitleAndMessage(startTime: startTime, interruptionCount: interruptionCount)
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        // Replace UIAlertActionStyle.Default by UIAlertActionStyle.default
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+            (result : UIAlertAction) -> Void in
+            completion()
+        }
+        
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    override open func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -153,24 +190,29 @@ open class WSAPStepViewController: RSQuestionViewController {
         
         //clear results
         if let trials = self.trials {
-            self.performTrials(trials, results: [], completion: { (results) in
+            self.performTrials(trials, results: [], completion: { (results, completed) in
                 //                print(results)
                 
                 self.pendingTrials = nil
                 self.pendingTrialResults = nil
                 
-                if !self.canceled {
-                    //set results
-                    // results is a list that contains all the trial results - Francesco
-                    //                    self.calculateAggregateResults(results)
-                    self.trialResults = results
+                self.trialResults = results
+                self.completed = completed
+                
+                if completed {
                     self.goForward()
                 }
+                else {
+                    self.presentInterruptionAlert(startTime: self.startTime, interruptionCount: self.interruptionCount, completion: {
+                        self.goForward()
+                    })
+                }
+                
             })
         }
     }
     
-    func performTrials(_ trials: [WSAPTrial], results: [WSAPTrialResult], completion: @escaping ([WSAPTrialResult]) -> ()) {
+    func performTrials(_ trials: [WSAPTrial], results: [WSAPTrialResult], completion: @escaping ([WSAPTrialResult], Bool) -> ()) {
         
         self.pendingTrials = trials
         self.pendingTrialResults = results
@@ -181,8 +223,9 @@ open class WSAPStepViewController: RSQuestionViewController {
 //            return
 //        }
         
-        if self.canceled {
-            completion([])
+        //check for ending based on start time and interruption count
+        if self.shouldEnd(startTime: self.startTime, interruptionCount: self.interruptionCount) {
+            completion(results, false)
             return
         }
         
@@ -197,7 +240,7 @@ open class WSAPStepViewController: RSQuestionViewController {
             })
         }
         else {
-            completion(results)
+            completion(results, true)
         }
         
 //        if let head = trials.first {
@@ -280,6 +323,8 @@ open class WSAPStepViewController: RSQuestionViewController {
             wsapResult.startDate = parentResult.startDate
             wsapResult.endDate = parentResult.endDate
             wsapResult.trialResults = trialResults
+            wsapResult.interruptionCount = self.interruptionCount
+            wsapResult.completed = self.completed
             
             parentResult.results = [wsapResult]
         }
