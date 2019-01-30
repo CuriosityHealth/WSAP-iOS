@@ -24,20 +24,26 @@ open class WSAPStepGenerator: RSTBBaseStepGenerator {
         return nil
     }
     
-    open func createStep(
-        identifier: String,
-        title: String?,
-        text: String?,
-        trials: [WSAPTrial],
-        imageMap: [String: UIImage]
-        ) -> WSAPStep {
-        return WSAPStep(
-            identifier: identifier,
-            title: title,
-            text: text,
-            trials: trials,
-            imageMap: imageMap
-        )
+//    open func createStep(
+//        identifier: String,
+//        title: String?,
+//        text: String?,
+//        trials: [WSAPTrial],
+//        imageMap: [String: UIImage],
+//        timeoutInterruptionDelegate: WSAPTimeoutInterruptionDelegate?
+//        ) -> WSAPStep {
+//        return WSAPStep(
+//            identifier: identifier,
+//            title: title,
+//            text: text,
+//            trials: trials,
+//            imageMap: imageMap,
+//
+//        )
+//    }
+    
+    open func generateTimeoutInterruptionDelegate(json: JSON) -> WSAPTimeoutInterruptionDelegate? {
+        return WSAPDefaultTimeoutInterruptionDelegate(json: json)
     }
     
     open func generateStep(type: String, jsonObject: JSON, helper: RSTBTaskBuilderHelper) -> ORKStep? {
@@ -60,13 +66,21 @@ open class WSAPStepGenerator: RSTBBaseStepGenerator {
         }) ?? []
         
         let imageMap: [String: UIImage] = Dictionary.init(uniqueKeysWithValues: imageMapPairs)
+        let timeoutInterruptionDelegate: WSAPTimeoutInterruptionDelegate? = {
+            guard let json = stepDescriptor.timeoutInterruptionJSON else {
+                return nil
+            }
+            
+            return self.generateTimeoutInterruptionDelegate(json: json)
+        }()
         
-        let step = self.createStep(
+        let step = WSAPStep(
             identifier: stepDescriptor.identifier,
             title: stepDescriptor.title,
             text: stepDescriptor.text,
             trials: trials,
-            imageMap: imageMap
+            imageMap: imageMap,
+            timeoutInterruptionDelegate: timeoutInterruptionDelegate
         )
         
         step.isOptional = stepDescriptor.optional

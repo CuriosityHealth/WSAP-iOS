@@ -14,17 +14,20 @@ open class WSAPStep: RSStep {
     
     public let trials: [WSAPTrial]
     public let imageMap: [String: UIImage]
+    public let timeoutInterruptionDelegate: WSAPTimeoutInterruptionDelegate?
     
     public init(
         identifier: String,
         title: String?,
         text: String?,
         trials: [WSAPTrial],
-        imageMap: [String: UIImage]
-        ) {
+        imageMap: [String: UIImage],
+        timeoutInterruptionDelegate: WSAPTimeoutInterruptionDelegate?
+    ) {
         
         self.trials = trials
         self.imageMap = imageMap
+        self.timeoutInterruptionDelegate = timeoutInterruptionDelegate
         super.init(identifier: identifier)
         self.title = title
         self.text = text
@@ -36,16 +39,6 @@ open class WSAPStep: RSStep {
     
     open override func stepViewControllerClass() -> AnyClass {
         return WSAPStepViewController.self
-    }
-    
-    open func shouldEnd(startTime: Date, interruptionCount: Int) -> Bool {
-        return false
-    }
-    
-    open func interruptionAlertTitleAndMessage(startTime: Date, interruptionCount: Int) -> (String, String) {
-        let title = "An Interruption Occurred"
-        let message = "Please finish the task in a more timely fashion."
-        return (title, message)
     }
     
 }

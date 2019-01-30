@@ -13,9 +13,11 @@ import ResearchSuiteTaskBuilder
 open class WSAPStepDescriptor: RSTBStepDescriptor {
     
     public let imageNameMap: [String: String]?
+    public let timeoutInterruptionJSON: JSON?
     
     public required init?(json: JSON) {
         self.imageNameMap = "imageMap" <~~ json
+        self.timeoutInterruptionJSON = "timeoutInterruption" <~~ json
         super.init(json: json)
     }
     

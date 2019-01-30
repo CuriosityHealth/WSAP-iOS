@@ -155,12 +155,21 @@ open class WSAPStepViewController: RSQuestionViewController {
 //    }
     
     open func shouldEnd(startTime: Date, interruptionCount: Int) -> Bool {
-        return self.wsapStep.shouldEnd(startTime: startTime, interruptionCount: interruptionCount)
+        guard let delegate = self.wsapStep.timeoutInterruptionDelegate else {
+            return false
+        }
+        
+        return delegate.shouldEnd(startTime: startTime, interruptionCount: interruptionCount)
     }
     
     open func presentInterruptionAlert(startTime: Date, interruptionCount: Int, completion: @escaping () -> ()) {
         
-        let (title, message) = self.wsapStep.interruptionAlertTitleAndMessage(startTime: startTime, interruptionCount: interruptionCount)
+        guard let delegate = self.wsapStep.timeoutInterruptionDelegate else {
+            assertionFailure("We shouldn't be able to get here since shouldEnd requires a delegate")
+            return
+        }
+        
+        let (title, message) = delegate.interruptionAlertTitleAndMessage(startTime: startTime, interruptionCount: interruptionCount)
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         
