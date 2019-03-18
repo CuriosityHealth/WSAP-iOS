@@ -107,6 +107,7 @@ open class WSAPView: UIView {
         case .buttons(let buttonDescriptors):
 
             var startTime: Date!
+//            var endTime: Date! = nil
             
             buttonDescriptors.forEach { (identifier, buttonTitle) in
                 
@@ -125,6 +126,11 @@ open class WSAPView: UIView {
                     make.center.equalToSuperview()
                 }
                 
+//                //set action
+//                let touchDown: (Date)->() = { touchTime in
+//                    endTime = touchTime
+//                }
+                
                 //set action
                 let buttonCompletion: (Date)->() = { endTime in
                     
@@ -134,9 +140,13 @@ open class WSAPView: UIView {
                     
                 }
                 
-                button.userInfo = ["buttonCompletion": buttonCompletion]
+                button.userInfo = [
+//                    "touchDown": touchDown,
+                    "buttonCompletion": buttonCompletion
+                ]
                 
-                button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+//                button.addTarget(self, action: #selector(touchDown(_:)), for: .touchDown)
+                button.addTarget(self, action: #selector(touchUp(_:)), for: .touchUpInside)
             }
             
             self.buttonStackView.isUserInteractionEnabled = true
@@ -155,8 +165,21 @@ open class WSAPView: UIView {
         
     }
     
-    @objc func buttonTapped(_ sender: RSBorderedButton) {
+//    @objc func touchDown(_ sender: RSBorderedButton) {
+//        let endTime = Date()
+//
+//        guard let touchDown: (Date)->() = sender.userInfo?["touchDown"] as? (Date)->() else {
+//            assertionFailure("Expecting completion to be set in userInfo")
+//            return
+//        }
+//
+//        touchDown(endTime)
+//
+//    }
+    
+    @objc func touchUp(_ sender: RSBorderedButton) {
         let endTime = Date()
+        
         guard let buttonCompletion: (Date)->() = sender.userInfo?["buttonCompletion"] as? (Date)->() else {
             assertionFailure("Expecting completion to be set in userInfo")
             return
@@ -164,6 +187,8 @@ open class WSAPView: UIView {
         
         buttonCompletion(endTime)
     }
+    
+    
     
     
     
