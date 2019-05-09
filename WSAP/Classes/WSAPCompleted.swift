@@ -13,13 +13,13 @@ import ResearchSuiteApplicationFramework
 
 open class WSAPCompleted: RSRPIntermediateResult, RSRPFrontEndTransformer {
     
-    static open let kType = "WSAPCompleted"
+    static public let kType = "WSAPCompleted"
     
     private static let supportedTypes = [
         kType
     ]
     
-    open static func supportsType(type: String) -> Bool {
+    public static func supportsType(type: String) -> Bool {
         return supportedTypes.contains(type)
     }
     

@@ -57,13 +57,13 @@ public struct WSAPSummaryStatisticsStruct: Glossy {
 
 open class WSAPSummaryStatistics: RSRPIntermediateResult, RSRPFrontEndTransformer {
     
-    static open let kType = "WSAPSummaryStatistics"
+    static public let kType = "WSAPSummaryStatistics"
     
     private static let supportedTypes = [
         kType
     ]
     
-    open static func supportsType(type: String) -> Bool {
+    public static func supportsType(type: String) -> Bool {
         return supportedTypes.contains(type)
     }
     
