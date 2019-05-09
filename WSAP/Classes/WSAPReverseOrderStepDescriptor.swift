@@ -11,8 +11,10 @@ import ResearchSuiteTaskBuilder
 
 open class WSAPReverseOrderStepDescriptor: WSAPStepDescriptor {
     
-    public let crossTime: TimeInterval
-    public let wordTime: TimeInterval
+    public let crossTime: TimeInterval?
+    public let crossTimeKey: String?
+    public let wordTime: TimeInterval?
+    public let wordTimeKey: String?
     public let relatedIdentifierSuffix: String
     public let unrelatedIdentifierSuffix: String
     public let choicePrompt: String
@@ -23,9 +25,7 @@ open class WSAPReverseOrderStepDescriptor: WSAPStepDescriptor {
     
     public required init?(json: JSON) {
         
-        guard let crossTime: TimeInterval = "cross_time" <~~ json,
-            let wordTime: TimeInterval = "word_time" <~~ json,
-            let relatedIdentifierSuffix: String = "related_identifier_suffix" <~~ json,
+        guard let relatedIdentifierSuffix: String = "related_identifier_suffix" <~~ json,
             let unrelatedIdentifierSuffix: String = "unrelated_identifier_suffix" <~~ json,
             let choicePrompt: String = "choice_prompt" <~~ json,
             let affirmativeButtonText: String = "affirmative_button_text" <~~ json,
@@ -33,8 +33,10 @@ open class WSAPReverseOrderStepDescriptor: WSAPStepDescriptor {
                 return nil
         }
         
-        self.crossTime = crossTime
-        self.wordTime = wordTime
+        self.crossTime = "cross_time" <~~ json
+        self.crossTimeKey = "cross_time" <~~ json
+        self.wordTime = "word_time" <~~ json
+        self.wordTimeKey = "word_time" <~~ json
         self.relatedIdentifierSuffix = relatedIdentifierSuffix
         self.unrelatedIdentifierSuffix = unrelatedIdentifierSuffix
         self.choicePrompt = choicePrompt
