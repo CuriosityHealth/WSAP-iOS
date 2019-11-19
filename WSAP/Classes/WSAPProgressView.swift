@@ -41,7 +41,7 @@ open class WSAPProgressView: UIView {
         
         
         stackView.axis = .vertical
-        stackView.alignment = .leading
+        stackView.alignment = .center
         stackView.spacing = 20
             
         stackView.addArrangedSubview(RSBasicCollectionViewCell.spacingView(axis: .vertical))
@@ -135,12 +135,12 @@ open class WSAPProgressView: UIView {
 
         if animated {
             UIView.animate(withDuration: 0.5) {
-                self.progressView.frame.size.width = width
+                self.progressView.layer.frame.size.width = width
                 self.progressLabel.text = WSAPProgressView.percentFormatter.string(from: NSNumber(floatLiteral: Double(progress)))
             }
         }
         else {
-            self.progressView.frame.size.width = width
+            self.progressView.layer.frame.size.width = width
             self.progressLabel.text = WSAPProgressView.percentFormatter.string(from: NSNumber(floatLiteral: Double(progress)))
         }
         
