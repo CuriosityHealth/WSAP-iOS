@@ -9,7 +9,6 @@ import UIKit
 import ResearchSuiteResultsProcessor
 import ResearchKit
 import Gloss
-//import ResearchSuiteApplicationFramework
 
 open class WSAPCompleted: RSRPIntermediateResult, RSRPFrontEndTransformer {
     

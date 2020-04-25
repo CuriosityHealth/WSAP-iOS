@@ -8,7 +8,6 @@
 import UIKit
 import SnapKit
 import ResearchSuiteExtensions
-//import ResearchSuiteApplicationFramework
 
 open class WSAPProgressView: UIView {
     

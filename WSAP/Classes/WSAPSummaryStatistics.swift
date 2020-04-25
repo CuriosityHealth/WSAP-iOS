@@ -11,7 +11,6 @@ import ResearchSuiteResultsProcessor
 import ResearchKit
 import Gloss
 import LS2SDK
-//import ResearchSuiteApplicationFramework
 
 public struct WSAPSummaryStatisticsStruct: Glossy {
    
