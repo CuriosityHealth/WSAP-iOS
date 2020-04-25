@@ -8,10 +8,23 @@
 import UIKit
 import SnapKit
 import ResearchSuiteExtensions
-import ResearchSuiteApplicationFramework
+//import ResearchSuiteApplicationFramework
 
 open class WSAPProgressView: UIView {
     
+    public static func spacingView(axis: NSLayoutConstraint.Axis) -> UIView {
+        let view = UIView()
+        view.snp.makeConstraints { (make) in
+            if axis == .vertical {
+                make.height.equalTo(0)
+            }
+            else {
+                make.width.equalTo(0)
+            }
+        }
+        
+        return view
+    }
     
     open var progressLabel: UILabel!
     var progressView: UIView!
@@ -41,10 +54,10 @@ open class WSAPProgressView: UIView {
         
         
         stackView.axis = .vertical
-        stackView.alignment = .center
+        stackView.alignment = .center   
         stackView.spacing = 20
             
-        stackView.addArrangedSubview(RSBasicCollectionViewCell.spacingView(axis: .vertical))
+        stackView.addArrangedSubview(WSAPProgressView.spacingView(axis: .vertical))
         
         self.progressLabel = RSTextLabel()
         self.progressLabel.textAlignment = .center
@@ -81,7 +94,7 @@ open class WSAPProgressView: UIView {
         self.progressView.frame.size.width = self.minProgressWidth
         
         
-        stackView.addArrangedSubview(RSBasicCollectionViewCell.spacingView(axis: .vertical))
+        stackView.addArrangedSubview(WSAPProgressView.spacingView(axis: .vertical))
         
         
 //        //we need to understand how wide the view is

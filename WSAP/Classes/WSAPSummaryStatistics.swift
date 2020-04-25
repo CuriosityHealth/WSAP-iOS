@@ -11,7 +11,7 @@ import ResearchSuiteResultsProcessor
 import ResearchKit
 import Gloss
 import LS2SDK
-import ResearchSuiteApplicationFramework
+//import ResearchSuiteApplicationFramework
 
 public struct WSAPSummaryStatisticsStruct: Glossy {
    
@@ -128,16 +128,7 @@ open class WSAPSummaryStatistics: RSRPIntermediateResult, RSRPFrontEndTransforme
     
 }
 
-extension WSAPSummaryStatistics {
-    open override func evaluate() -> AnyObject? {
-        if self.schema == nil {
-            return self.summaryStats.toJSON() as AnyObject
-        }
-        else {
-            return self
-        }
-    }
-}
+
 
 extension WSAPSummaryStatistics: LS2DatapointConvertible {
     public func toDatapoint(builder: LS2DatapointBuilder.Type) -> LS2Datapoint? {

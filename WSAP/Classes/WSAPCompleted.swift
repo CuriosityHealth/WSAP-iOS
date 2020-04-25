@@ -9,7 +9,7 @@ import UIKit
 import ResearchSuiteResultsProcessor
 import ResearchKit
 import Gloss
-import ResearchSuiteApplicationFramework
+//import ResearchSuiteApplicationFramework
 
 open class WSAPCompleted: RSRPIntermediateResult, RSRPFrontEndTransformer {
     
@@ -43,7 +43,7 @@ open class WSAPCompleted: RSRPIntermediateResult, RSRPFrontEndTransformer {
         
     }
     
-    let result: WSAPResult
+    public let result: WSAPResult
     public init(
         uuid: UUID,
         taskIdentifier: String,
@@ -60,10 +60,4 @@ open class WSAPCompleted: RSRPIntermediateResult, RSRPFrontEndTransformer {
         )
     }
     
-}
-
-extension WSAPCompleted {
-    open override func evaluate() -> AnyObject? {
-        return self.result.completed as AnyObject
-    }
 }
