@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'WSAP'
-  s.version          = '0.5.0'
+  s.version          = '0.6.0'
   s.summary          = 'A short description of WSAP.'
 
 # This description is used to generate tags and improve search results.
@@ -42,8 +42,8 @@ TODO: Add long description of the pod here.
 
   s.dependency 'Gloss', '~> 2.0'
   s.dependency 'LS2SDK', '~> 0.10'
-  s.dependency 'ResearchKit', '~> 1.5'
-  s.dependency 'ResearchSuiteExtensions', '~> 0.22'
+  s.dependency 'ResearchKit', '~> 1.6'
+  s.dependency 'ResearchSuiteExtensions', '~> 0.28'
   s.dependency 'ResearchSuiteTaskBuilder', '~> 0.13'
   s.dependency 'ResearchSuiteResultsProcessor', '~> 0.9'
   s.dependency 'SnapKit', '~> 4.0'
